@@ -1,0 +1,48 @@
+
+<%- include('common/head_section.ejs') %>
+<h1 style="text-align: center;"><%= pageTitle == 'Edit Product' ? 'Edit Product' : 'Add Product'%></h1>
+    <!-- <form action="<%= pageTitle == 'Edit Product' ? '/product/edit' : '/product/add'%>" method="POST">             -->
+    <!-- <form action="<%= pageTitle === 'Edit Product' ? '/product/edit' : pageTitle === 'View Page Product Edit' ? '/viewPageProduct/edit' : '/product/add' %>" method="POST">            
+        <label for="name">Name:</label>            
+        <input type="text" class="form-control" id="name" name="name" value="<%= pageTitle == ('Edit Product' || 'View Page Product Edit') ? product.name : ''%>"><br> 
+        <label for="image">Image:</label>         
+        <input type="text" class="form-control" id="image" name="image" value="<%= pageTitle == ('Edit Product' || 'View Page Product Edit') ? product.image : ''%>"><br>
+        <label for="price">Price:</label>
+        <input type="text" class="form-control" id="price" name="price" value="<%= pageTitle == ('Edit Product' || 'View Page Product Edit') ? product.price : ''%>"><br>
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" id="description" name="description" value="<%= pageTitle == ('Edit Product' || 'View Page Product Edit') ? product.description : ''%>"><br>
+        <input type="hidden" id="quantity" name="quantity" value="<%= pageTitle == ('Edit Product' || 'View Page Product Edit') ? product.quantity : ''%>"><br>
+        <input type="hidden" id="isEdit" name="isEdit" value="<%= pageTitle == ('Edit Product' || 'View Page Product Edit') ? product.isEdit : ''%>"><br>
+        <input type="hidden"  id="description" name="id" value="<%= pageTitle == ('Edit Product' || 'View Page Product Edit')? product.id : ''%>"><br>
+        <input type="submit" value="Submit">        
+    </form> -->
+    <form action="<%= pageTitle === 'Edit Product' ? '/product/edit' : pageTitle === 'View Page Product Edit' ? '/viewPageProduct/edit' : '/product/add' %>" method="POST">            
+        <label for="name">Name:</label>            
+        <input type="text" class="form-control" id="name" name="name" 
+               value="<%= (pageTitle === 'Edit Product' || pageTitle === 'View Page Product Edit') && product ? product.name : '' %>"><br> 
+        
+        <label for="image">Image:</label>         
+        <input type="text" class="form-control" id="image" name="image" 
+               value="<%= (pageTitle === 'Edit Product' || pageTitle === 'View Page Product Edit') && product ? product.image : '' %>"><br>
+    
+        <label for="price">Price:</label>
+        <input type="text" class="form-control" id="price" name="price" 
+               value="<%= (pageTitle === 'Edit Product' || pageTitle === 'View Page Product Edit') && product ? product.price : '' %>"><br>
+    
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" id="description" name="description" 
+               value="<%= (pageTitle === 'Edit Product' || pageTitle === 'View Page Product Edit') && product ? product.description : '' %>"><br>
+    
+        <input type="hidden" id="quantity" name="quantity" 
+               value="<%= (pageTitle === 'Edit Product' || pageTitle === 'View Page Product Edit') && product ? product.quantity : '' %>"><br>
+    
+        <input type="hidden" id="isEdit" name="isEdit" 
+               value="<%= (pageTitle === 'Edit Product' || pageTitle === 'View Page Product Edit') && product ? product.isEdit : '' %>"><br>
+    
+        <input type="hidden" id="id" name="id" 
+               value="<%= (pageTitle === 'Edit Product' || pageTitle === 'View Page Product Edit') && product ? product.id : '' %>"><br>
+    
+        <input type="submit" value="Submit">        
+    </form>
+    
+<%- include('common/footer.ejs') %>

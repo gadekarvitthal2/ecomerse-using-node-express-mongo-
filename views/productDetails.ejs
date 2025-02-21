@@ -1,0 +1,43 @@
+<!-- //product details product -->
+<%- include('common/head_section.ejs') %>
+    <h1 style="text-align: center;" >Product Details</h1>
+    <div class="product-details" style="max-width: 900px; margin: auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <!-- Product Image -->
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <img src="<%= product.image %>" alt="<%= product.name %>" style="width: 100%; max-width: 500px; height: auto; border-radius: 8px;">
+        </div>
+
+        <!-- Product Name -->
+        <h1 style="text-align: center; font-size: 2.5em; font-weight: bold; color: #333; margin-bottom: 10px;">
+            <%= product.name %>
+        </h1>
+
+        <!-- Product Price -->
+        <p style="text-align: center; font-size: 1.8em; color: #E74C3C; font-weight: bold; margin-bottom: 20px;">
+            <%= product.price %>
+        </p>
+
+        <!-- Product Description -->
+        <div style="font-size: 1.2em; color: #666; line-height: 1.6; text-align: justify;">
+            <p><%= product.description %></p>
+        </div>
+
+        <!-- Additional Details (Optional) -->
+        <div style="margin-top: 30px; border-top: 2px solid #ddd; padding-top: 20px;">
+            <h3 style="font-size: 1.6em; color: #333;">Product Features</h3>
+            <ul style="font-size: 1.2em; color: #555;">
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+            </ul>
+        </div>
+
+        <!-- Buy Now Button -->
+        <div style="text-align: center; margin-top: 30px;">
+            <button style="background-color: #3498DB; color: white; padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+                Buy Now
+            </button>
+        </div>
+    </div>
+<%- include('common/footer.ejs') %>
+<!-- //product details product -->

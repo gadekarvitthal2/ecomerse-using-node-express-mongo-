@@ -1,0 +1,27 @@
+<%- include('common/head_section.ejs') %>
+<h1 style="text-align: center;">PRODUCT DETAILS</h1>
+    <% if (cartData.length) { %>
+        <div class="card-container">
+            <% for (let product of cartData) { %>
+                <div class="product-card">
+                    <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+                    <p class="product-name"><%= product.name %></p>
+                    <p class="product-price"><%= product.price %></p>
+                    <p class="product-description"><%= product.description %></p>
+                    <% if (!product.isEdit) { %>
+                        <button class="view-product"><a href="/product/details/<%= product.id %>">View Product</a></button>
+                        <%- include('common/addTocartBtn.ejs', { product: product }) %>
+                    <% } else { %>
+                        <button class="view-product"><a href="/product/edit/<%= product.id %>">Edit</a></button>
+                        <button class="view-product" class="p-2"><a href="/product/delete/<%= product.id %>">Delete</a></button>
+                        <!-- <form action="/product/delete/<%= product.id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="view-product">Delete</button>
+                        </form> -->
+                    <% } %>
+                </div>            
+            <% } %>
+        </div>
+    <% } else { %>
+        <h1 style="text-align: center;">No products found</h1>
+    <% } %>
+<%- include('common/footer.ejs') %>
