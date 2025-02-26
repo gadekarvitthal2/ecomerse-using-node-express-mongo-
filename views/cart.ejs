@@ -1,0 +1,44 @@
+
+<%- include('common/head_section.ejs') %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Cart Details</h1>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(cartData.length > 0) {%>
+                    <% cartData.forEach((item) => { %>
+                        <tr>
+                            <td><%= item.name %></td>
+                            <td>$<%= item.price %></td>
+                            <td><%= item.quantity %></td>
+                            <td>$<%= item.price * item.quantity %></td>
+                            <td>
+                                <a href="/product/delete/<%= item.id %>" class="btn btn-danger">Remove</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                    <% } else {%>
+                        <tr>
+                            <td colspan="5" style="text-align: center;">No Product Found</td>
+                        </tr>
+                    <% }%>
+                </tbody>
+            </table>
+          <!-- total price -->
+            <h3 style="text-align: right;margin-right: 24%;">Total Price: $<%= totalPrice %></h3>
+            <a href="/product/cart/checkout" class="btn btn-primary">Checkout</a>
+        </div>
+    </div>
+</div>
+    
+<%- include('common/footer.ejs') %>

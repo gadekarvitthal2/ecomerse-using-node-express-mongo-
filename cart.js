@@ -1,6 +1,6 @@
 const express = require('express');
 cartRouter = express.Router();
-const { getCartDetails, addCartDetails ,editCartDetails,deleteCartDetails} = require('./controller/cartController');
+const { getCartDetails, addCartDetails ,editCartDetails,deleteCartDetails,viewCartDetails} = require('./controller/cartController');
 // Route to render the cart page
 cartRouter.get('/product/cart', getCartDetails);
 
@@ -15,5 +15,11 @@ cartRouter.post('/product/edit',editCartDetails);
 
 // Route to handle deleting a product from the cart
 cartRouter.get('/product/delete/:productId',deleteCartDetails);
+
+// Route to handle deleting a product from the cart
+cartRouter.get('/viewcart', viewCartDetails);
+
+
+
 
 exports.cartRouter = cartRouter;
