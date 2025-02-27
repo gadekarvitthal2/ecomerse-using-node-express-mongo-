@@ -6,8 +6,9 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const { productRouter } = require('./product.js');
 const { cartRouter } = require('./cart.js');
+const {connection,fetchData} = require('./database.js');
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -19,14 +20,17 @@ app.use(homeRoute.homeRoutes);
 
 app.use(productRouter);
 app.use(cartRouter);
+
+const data = fetchData().then((result) => {
+});
 //bootstrap routing
-app.use('/css', (req, res) => {    
+app.use('/css', (req, res) => {
     res.sendFile(path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'css', 'bootstrap.min.css'));
 });
- 
+
 // Error handling middleware
-app.use((req,res,next) => {
-    res.status(404).render('404', {pageTitle: 'Page Not Found'});
+app.use((req, res, next) => {
+    res.status(404).render('404', { pageTitle: 'Page Not Found' });
     // res.redirect('/');
 });
 
