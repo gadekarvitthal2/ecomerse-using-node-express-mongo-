@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const { productRouter } = require('./product.js');
 const { cartRouter } = require('./cart.js');
-const {connection,fetchData} = require('./database.js');
+const {fetchData,sequelizeConn} = require('./database.js');
+const Data = require('./models/product.js');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -23,6 +24,32 @@ app.use(cartRouter);
 
 const data = fetchData().then((result) => {
 });
+
+sequelizeConn.authenticate()
+    .then(() => {
+        console.log('Connected to sequalize!');
+    })
+    .catch(err => {
+        console.error('Error connecting to MariaDB:', err);
+    });
+
+    Data.sync().then(() => {
+        console.log('Database synced');
+    }).catch(err => {
+        console.error('Error syncing database:', err);
+    });
+
+    Data.create({
+        title: 'A Book',
+        name: 'Book',
+        price: 12.99,
+        imageUrl: 'https://www.google.com',
+        description: 'A book about something'
+    }).then(result => {
+        console.log('Created a product');
+    }).catch(err => {
+        console.error('Error creating product:', err);
+    });
 //bootstrap routing
 app.use('/css', (req, res) => {
     res.sendFile(path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'css', 'bootstrap.min.css'));

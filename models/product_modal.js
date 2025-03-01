@@ -1,6 +1,6 @@
 const routePath = require('../utils/path');
 const fs = require('fs').promises; // Use fs.promises for async operations
-const {fetchData} = require('../database');
+const {fetchData,pool,setData} = require('../database');
 
 // Define the path to the JSON file
 const productPath = routePath + '/data/product.json';
@@ -28,14 +28,15 @@ const readDataFromFile = async () => {
  * @param {Object} product - The product object to be added.
  */
 const addProduct = async (product) => {
+  let conn;
   try {
-    const productData = await readDataFromFile(); // Get existing products
-    productData.push(product); // Add new product
-console.log('product :>> ', product);
-    await fs.writeFile(productPath, JSON.stringify(productData, null, 2)); // Write updated data
+    conn = await pool.getConnection();
+    await conn.query('INSERT INTO data (name, image, price, description, quantity, isEdit,total) VALUES (?, ?, ?, ?, ?, ?, ?)', [product.name, product.image, product.price, product.description, product.quantity, product.isEdit, product.total]);
     console.log('Product added successfully!');
   } catch (err) {
     console.error('Error adding product:', err);
+  } finally {
+    if (conn) conn.release(); // Ensure the connection is released
   }
 };
 
